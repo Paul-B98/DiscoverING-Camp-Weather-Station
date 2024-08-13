@@ -1,1 +1,7 @@
-# DiscoverING-Camp-Weather-Station
+# DiscoverING-Camp Weather Station
+
+## Web-App
+
+migrate
+runserver
+createsuperuser
