@@ -19,9 +19,9 @@ class WeatherStationConfig(AppConfig):
             response = requests.get(settings.WEATHER_STATION_API_URL)
             if response.status_code == 200:
                 data = response.json()
-                WeatherData.objects.create(
-                    temperature=data.get('temperature'),
-                    humidity=data.get('humidity')
-                )
+                # WeatherData.objects.create(
+                #     temperature=data.get('temperature'),
+                #     humidity=data.get('humidity')
+                # )
 
         sched.start()

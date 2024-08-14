@@ -7,4 +7,4 @@ class WeatherData(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.temperature:.3}°C, {self.humidity:.3}%'
+        return f'{self.temperature:.1f}°C, {self.humidity:.1f}%'
