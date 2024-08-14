@@ -1,0 +1,39 @@
+{% extends "weather_station/base.html" %}
+
+{% block content %}
+
+<h1 class="text-4xl font-extrabold">Tabelle</h1>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 max-h-96">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Datum
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Uhrzeit
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Temperatur
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Luftfeuchtigkeit
+                </th>
+            </tr>
+        </thead>
+        <tbody class="h-96 overflow-y-auto">
+            {% for d in data %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">{{ d.created_at|date:"D d.m.Y" }}</td>
+                    <td class="px-6 py-4">{{ d.created_at|date:"H:i:s" }}</td>
+                    <td class="px-6 py-4">{{ d.temperature|stringformat:".2f" }} °C</td>
+                    <td class="px-6 py-4">{{ d.humidity|stringformat:".2f" }} %</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+

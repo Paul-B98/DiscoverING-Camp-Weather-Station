@@ -1,0 +1,124 @@
+{% extends "weather_station/base.html" %}
+
+{% block content %}
+
+<script type="module">
+const width = 550;
+const height = 400;
+const marginTop = 20;
+const marginRight = 20;
+const marginBottom = 30;
+const marginLeft = 40;
+
+const data = {{ data|safe }};
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleUtc(d3.extent(data, d => new Date(d.fields.created_at)), [marginLeft, width - marginRight])
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear(d3.extent(data, d => d.fields.temperature), [height - marginBottom, marginTop])
+
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Create the line.
+const line = d3.line()
+    .x(d => x(new Date(d.fields.created_at)))
+    .y(d => y(d.fields.temperature));
+
+
+// Add the x-axis.
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+
+// Add the y-axis.
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
+
+// Add Line
+svg.append("path")
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", line(data));
+
+
+// Append the SVG element.
+
+temperature.append(svg.node());
+</script>
+
+<script type="module">
+const width = 550;
+const height = 400;
+const marginTop = 20;
+const marginRight = 20;
+const marginBottom = 30;
+const marginLeft = 40;
+
+const data = {{ data|safe }};
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleUtc(d3.extent(data, d => new Date(d.fields.created_at)), [marginLeft, width - marginRight])
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear(d3.extent(data, d => d.fields.humidity), [height - marginBottom, marginTop])
+
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Create the line.
+const line = d3.line()
+    .x(d => x(new Date(d.fields.created_at)))
+    .y(d => y(d.fields.humidity));
+
+
+// Add the x-axis.
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+
+// Add the y-axis.
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
+
+// Add Line
+svg.append("path")
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", line(data));
+
+
+// Append the SVG element.
+
+humidity.append(svg.node());
+</script>
+
+<h1 class="text-4xl font-extrabold">Grafik</h1>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 max-h-min">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="m-2">
+            <h2 class="text-xl font-extrabold">Temperatur</h2>
+            <div id="temperature">
+            </div>
+        </div>
+        <div class="m-2">
+            <h2 class="text-xl font-extrabold">Luftfeuchtigkeit</h2>
+            <div id="humidity"></div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

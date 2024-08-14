@@ -1,0 +1,39 @@
+{% extends "weather_station/base.html" %}
+
+{% block content %}
+
+<h1 class="text-4xl font-extrabold">Statistik</h1>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 max-h-96">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="m-2">
+            <h2 class="text-xl font-extrabold">Temperatur</h2>
+            <div class="grid grid-cols-2 mt-4">
+                <div>Durchschnitt:</div>
+                <div>{{ data.temperature.avg|stringformat:".2f" }}</div>
+                <div>Maximum:</div>
+                <div>{{ data.temperature.max|stringformat:".2f" }}</div>
+                <div>Minimum:</div>
+                <div>{{ data.temperature.min|stringformat:".2f" }}</div>
+                <div>Anzahl an Messungen:</div>
+                <div>{{ data.temperature.len|stringformat:".2f" }}</div>
+            </div>
+        </div>
+        <div class="m-2">
+            <h2 class="text-xl font-extrabold">Luftfeuchtigkeit</h2>
+            <div class="grid grid-cols-2 mt-4">
+                <div>Durchschnitt:</div>
+                <div>{{ data.humidity.avg|stringformat:".2f" }}</div>
+                <div>Maximum:</div>
+                <div>{{ data.humidity.max|stringformat:".2f" }}</div>
+                <div>Minimum:</div>
+                <div>{{ data.humidity.min|stringformat:".2f" }}</div>
+                <div>Anzahl an Messungen:</div>
+                <div>{{ data.humidity.len|stringformat:".2f" }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

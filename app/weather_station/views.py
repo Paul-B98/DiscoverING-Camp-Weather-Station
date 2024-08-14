@@ -2,6 +2,7 @@ import random
 
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.core.serializers import serialize
 
 from .models import WeatherData
 
@@ -36,7 +37,7 @@ def graphic(request: HttpRequest) -> HttpResponse:
     """
     Render the weather station index page.
     """
-    context = {"data": WeatherData.objects.all()}
+    context = {"data": serialize("json", WeatherData.objects.all(), fields=('temperature', 'humidity', 'created_at'))}
     return render(request, 'weather_station/graphic.html', context=context)
 
 

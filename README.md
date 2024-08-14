@@ -5,3 +5,9 @@
 migrate
 runserver
 createsuperuser
+
+## Microcontroller
+
+Arduino IDE
+script anpassen
+Schema
